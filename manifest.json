@@ -1,0 +1,11 @@
+{
+  "background_color": "#000000",
+  "dir": "ltr",
+  "display": "standalone",
+  "name": "Samarth PG",
+  "orientation": "any",
+  "scope": "/",
+  "short_name": "Samarth PG",
+  "start_url": "/",
+  "theme_color": "#0f766e"
+}
