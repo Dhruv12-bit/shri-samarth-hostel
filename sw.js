@@ -1,12 +1,12 @@
 // Simple service worker for offline support
-const CACHE_NAME = 'samarth-pg-v2';
+const CACHE_NAME = 'samarth-pg-v3';
 const ASSETS = [
   '/',
   '/index.html',
   '/manifest.json',
-  '/icon.svg',
-  '/icon-192.png',
-  '/icon-512.png'
+  '/icon-v2.svg',
+  '/icon-192-v2.png',
+  '/icon-512-v2.png'
 ];
 
 self.addEventListener('install', (event) => {
