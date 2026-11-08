@@ -1,10 +1,12 @@
 // Simple service worker for offline support
-const CACHE_NAME = 'samarth-pg-v1';
+const CACHE_NAME = 'samarth-pg-v2';
 const ASSETS = [
   '/',
   '/index.html',
   '/manifest.json',
-  '/icon.svg'
+  '/icon.svg',
+  '/icon-192.png',
+  '/icon-512.png'
 ];
 
 self.addEventListener('install', (event) => {
@@ -27,7 +29,6 @@ self.addEventListener('fetch', (event) => {
   event.respondWith(
     caches.match(event.request).then((cached) => {
       return cached || fetch(event.request).then((response) => {
-        // Optionally cache new requests
         return response;
       });
     })
