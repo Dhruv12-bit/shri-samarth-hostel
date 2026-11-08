@@ -1,11 +1,18 @@
 {
-  "background_color": "#000000",
-  "dir": "ltr",
-  "display": "standalone",
-  "name": "Samarth PG",
-  "orientation": "any",
-  "scope": "/",
+  "name": "Shri Samarth PG Owner",
   "short_name": "Samarth PG",
+  "description": "Manage tenants, rent collection and WhatsApp reminders for Shri Samarth PG",
   "start_url": "/",
-  "theme_color": "#0f766e"
+  "display": "standalone",
+  "background_color": "#0f766e",
+  "theme_color": "#0f766e",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
 }

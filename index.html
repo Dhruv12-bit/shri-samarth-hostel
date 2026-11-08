@@ -8,7 +8,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Samarth PG">
-<link rel="manifest" href='data:application/manifest+json,{"name":"Shri Samarth PG Owner","short_name":"Samarth PG","display":"standalone","background_color":"#0f766e","theme_color":"#0f766e","icons":[{"src":"data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Crect width=%27100%27 height=%27100%27 rx=%2722%27 fill=%27%230f766e%27/%3E%3Ctext x=%2750%27 y=%2772%27 font-size=%2760%27 text-anchor=%27middle%27%3E🏠%3C/text%3E%3C/svg%3E","sizes":"512x512","type":"image/svg+xml","purpose":"any"}]}'>
+<link rel="manifest" href="/manifest.json">
 <style>
 :root{--bg:#f4f6f5;--card:#fff;--tx:#14201d;--mut:#62726e;--bd:#e1e7e5;--pri:#0f766e;--on:#fff;--red:#c2410c;--redbg:#ffedd5;--grn:#15803d;--grnbg:#dcfce7;--amb:#a16207;--ambbg:#fef3c7}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1514;--card:#17211f;--tx:#e8f0ee;--mut:#8fa29d;--bd:#26332f;--pri:#2dd4bf;--on:#06201c;--red:#fdba74;--redbg:#3b1d0c;--grn:#86efac;--grnbg:#10301c;--amb:#fde68a;--ambbg:#33290a}}
@@ -180,6 +180,7 @@ $('sExp').onclick=function(){var j=JSON.stringify(S);
 $('sImp').onclick=function(){var j=prompt('Paste backup text here:');if(!j)return;
   try{var o=JSON.parse(j);if(!o.tenants)throw 0;S=Object.assign(JSON.parse(JSON.stringify(DEF)),o);save();$('dSet').close();render()}catch(e){alert('Invalid backup')}};
 
+if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js').catch(function(){})}
 var dp=null;window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();dp=e;$('inst').hidden=false});
 $('inst').onclick=function(){if(dp){dp.prompt();dp=null;$('inst').hidden=true}};
 render();
