@@ -115,7 +115,6 @@ textarea{min-height:110px}
   import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
   import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-firestore.js";
 
-  // CORRECTED API KEY HERE:
   const firebaseConfig = {
     apiKey: "AIzaSyBb4QY0hPwEPxo0OBcHWugKPznzfBSmF1M",
     authDomain: "samarth-pg.firebaseapp.com",
@@ -154,12 +153,31 @@ textarea{min-height:110px}
     }
   }
 
-  // Handle Authentication
+  // Handle Authentication & Dynamic Firestore Block
   onAuthStateChanged(auth, async (user) => {
     if (user) {
-      currentUser = user;
       $('login-container').style.display = 'none';
       $('app-container').style.display = 'block';
+      $('syncTip').textContent = "Verifying access...";
+
+      // 🚨 DYNAMIC ALLOWLIST CHECK
+      try {
+        const whitelistRef = doc(db, "allowed_emails", user.email.toLowerCase());
+        const whitelistSnap = await getDoc(whitelistRef);
+        
+        if (!whitelistSnap.exists()) {
+          alert("Access Denied: " + user.email + " has not purchased access. Please contact the owner.");
+          await signOut(auth);
+          return;
+        }
+      } catch (err) {
+        console.error("Verification failed", err);
+        alert("Unable to verify access right now.");
+        await signOut(auth);
+        return;
+      }
+
+      currentUser = user;
       $('syncTip').textContent = "Syncing data...";
 
       try {
@@ -169,12 +187,11 @@ textarea{min-height:110px}
           if(!S.tenants) S.tenants = [];
           if(!S.pay) S.pay = {};
         } else {
-          // If no cloud data exists yet, check if there's old local data to migrate
           try {
             let local = JSON.parse(localStorage.getItem(KEY));
             if(local && local.tenants) S = local;
           } catch(e){}
-          save(); // Push new or migrated data to cloud
+          save(); 
         }
       } catch(error) {
         console.error("Error fetching data:", error);
@@ -189,7 +206,6 @@ textarea{min-height:110px}
     }
   });
 
-  // POPUP LOGIN HANDLER (Fixes the redirect loop):
   $('btnLogin').onclick = () => {
     signInWithPopup(auth, provider).catch(err => {
       console.error("Login failed:", err);
