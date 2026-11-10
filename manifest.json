@@ -1,8 +1,8 @@
 {
   "id": "/",
-  "name": "Shri Samarth PG Owner",
-  "short_name": "Samarth PG",
-  "description": "Manage tenants, rent collection and WhatsApp reminders for Shri Samarth PG",
+  "name": "Hostel Management",
+  "short_name": "Hostel App",
+  "description": "Manage tenants, rent collection and WhatsApp reminders",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
