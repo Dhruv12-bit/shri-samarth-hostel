@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Shri Samarth PG – Owner</title>
+<title>Hostel Management</title>
 <meta name="theme-color" content="#0f766e">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="Samarth PG">
+<meta name="apple-mobile-web-app-title" content="Hostel App">
 <link rel="manifest" href="/manifest.json">
 <style>
 :root{--bg:#f4f6f5;--card:#fff;--tx:#14201d;--mut:#62726e;--bd:#e1e7e5;--pri:#0f766e;--on:#fff;--red:#c2410c;--redbg:#ffedd5;--grn:#15803d;--grnbg:#dcfce7;--amb:#a16207;--ambbg:#fef3c7}
@@ -66,7 +66,7 @@ textarea{min-height:110px}
 
 <!-- LOGIN SCREEN -->
 <div id="login-container" style="display: none;">
-  <h2>🏠 Shri Samarth PG</h2>
+  <h2>🏠 Hostel Management</h2>
   <p>Owner Dashboard</p>
   <button id="btnLogin" class="p" style="padding: 12px 24px; font-size: 16px;">Sign in with Google</button>
 </div>
@@ -74,7 +74,8 @@ textarea{min-height:110px}
 <!-- MAIN APP -->
 <div id="app-container" style="display: none;">
   <header>
-    <h1><span>🏠 <span id="hdrPgName">Shri Samarth PG</span></span><span><button class="g" id="btnLogout" style="font-size:14px;">🚪 Out</button><button class="g" id="inst" hidden>Install</button><button class="g" id="set">⚙️</button></span></h1>
+    <!-- PG Name loads dynamically here -->
+    <h1><span>🏠 <span id="hdrPgName">My Hostel</span></span><span><button class="g" id="btnLogout" style="font-size:14px;">🚪 Out</button><button class="g" id="inst" hidden>Install</button><button class="g" id="set">⚙️</button></span></h1>
     <div class="mn"><button class="g" id="prev">‹</button><b id="mlabel"></b><button class="g" id="next">›</button></div>
   </header>
   <div class="sum" id="sum"></div>
@@ -134,7 +135,8 @@ textarea{min-height:110px}
   const $=function(i){return document.getElementById(i)};
   
   const KEY = 'samarth_pg_owner_v1';
-  const DEF = {pg:'Shri Samarth PG',tpl:'Hello {name} ji 🙏\n{pg} rent for {month} is ₹{due} pending. Please pay soon. Thank you!',tenants:[],pay:{}};
+  // Generic defaults for new users
+  const DEF = {pg:'My Hostel',tpl:'Hello {name} ji 🙏\n{pg} rent for {month} is ₹{due} pending. Please pay soon. Thank you!',tenants:[],pay:{}};
   let S = JSON.parse(JSON.stringify(DEF));
   
   const MN=['January','February','March','April','May','June','July','August','September','October','November','December'];
@@ -160,7 +162,7 @@ textarea{min-height:110px}
       $('app-container').style.display = 'block';
       $('syncTip').textContent = "Verifying access...";
 
-      // 🚨 DYNAMIC ALLOWLIST CHECK
+      // DYNAMIC ALLOWLIST CHECK
       try {
         const whitelistRef = doc(db, "allowed_emails", user.email.toLowerCase());
         const whitelistSnap = await getDoc(whitelistRef);
